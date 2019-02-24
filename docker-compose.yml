@@ -3,7 +3,10 @@ services:
   influxdb:
     image: influxdb:latest
     ports:
-      - '8086:8086'
+      - "8086:8086"
+      - "8082:8082"
+      # UDP Port
+      - "8089:8089"
     volumes:
       - influxdb-storage:/var/lib/influxdb
     environment:
