@@ -27,13 +27,16 @@ services:
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
   grafana:
     image: grafana/grafana:latest
+    command: cfg:default.users.allow_sign_up=false
     ports:
       - '3000:3000'
     volumes:
       - grafana-storage:/var/lib/grafana
       - ./grafana-provisioning/:/etc/grafana/provisioning
+      - ./grafana.ini:/etc/grafana/grafana.ini
     depends_on:
       - influxdb
+    
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
